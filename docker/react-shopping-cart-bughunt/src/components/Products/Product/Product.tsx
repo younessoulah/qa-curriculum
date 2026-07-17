@@ -31,7 +31,7 @@ const Product = ({ product }: IProps) => {
 
     productInstallment = (
       <S.Installment>
-        <span>or {installments} x</span>
+        <span>or {installments + 1} x</span>
         <b>
           {currencyFormat}
           {formatPrice(installmentPrice, currencyId)}
