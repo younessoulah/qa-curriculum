@@ -147,7 +147,6 @@ public class BookingDB {
 
         Calendar parseCheckinDate = Calendar.getInstance();
         parseCheckinDate.setTime(Date.valueOf(bookingToCheck.getBookingDates().getCheckin()));
-        parseCheckinDate.add(Calendar.DATE, 1);
 
         for(int i = 1; i <= 6; i++){
             if (i % 2 == 0){
