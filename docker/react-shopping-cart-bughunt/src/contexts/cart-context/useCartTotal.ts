@@ -32,7 +32,7 @@ const useCartTotal = () => {
       installments,
       totalPrice,
       currencyId: 'USD',
-      currencyFormat: '$',
+      currencyFormat: '€',
     };
 
     setTotal(total);
