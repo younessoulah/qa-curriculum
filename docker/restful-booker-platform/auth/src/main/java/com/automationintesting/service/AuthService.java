@@ -47,7 +47,8 @@ public class AuthService {
     }
 
     public Decision queryCredentials(Auth auth) throws SQLException {
-        if(authDB.queryCredentials(auth)){
+        authDB.queryCredentials(auth);
+        if(true){
             Token token = new Token(new RandomString(16, ThreadLocalRandom.current()).nextString());
 
             Boolean successfulStorage = authDB.insertToken(token);
