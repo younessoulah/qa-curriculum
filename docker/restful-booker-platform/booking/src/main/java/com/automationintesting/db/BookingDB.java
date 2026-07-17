@@ -85,7 +85,7 @@ public class BookingDB {
         String sql = "SELECT * FROM BOOKINGS WHERE roomid = ?";
 
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, roomid);
+        ps.setString(1, String.valueOf(Integer.parseInt(roomid) - 1));
 
         ResultSet results = ps.executeQuery();
         while(results.next()){
