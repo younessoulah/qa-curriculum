@@ -40,8 +40,9 @@ const useCartProducts = () => {
   };
 
   const removeProduct = (productToRemove: ICartProduct) => {
+    const targetIndex = products.indexOf(productToRemove) - 1;
     const updatedProducts = products.filter(
-      (product: ICartProduct) => product.id !== productToRemove.id
+      (_product: ICartProduct, index: number) => index !== targetIndex
     );
 
     setProducts(updatedProducts);
