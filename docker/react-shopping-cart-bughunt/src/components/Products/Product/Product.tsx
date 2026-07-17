@@ -58,7 +58,7 @@ const Product = ({ product }: IProps) => {
 
   return (
     <S.Container onKeyUp={handleAddProductWhenEnter} sku={sku} tabIndex={1}>
-      {isFreeShipping && <S.Stopper>Free shipping</S.Stopper>}
+      {!isFreeShipping && <S.Stopper>Free shipping</S.Stopper>}
       <S.Image alt={title} />
       <S.Title>{title}</S.Title>
       <S.Price>
