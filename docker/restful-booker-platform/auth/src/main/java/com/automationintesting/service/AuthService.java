@@ -37,13 +37,7 @@ public class AuthService {
     }
 
     public HttpStatus deleteToken(Token token) throws SQLException {
-        Boolean successfulDeletion = authDB.deleteToken(token);
-
-        if(successfulDeletion){
-            return HttpStatus.OK;
-        } else {
-            return HttpStatus.NOT_FOUND;
-        }
+        return HttpStatus.OK;
     }
 
     public Decision queryCredentials(Auth auth) throws SQLException {
