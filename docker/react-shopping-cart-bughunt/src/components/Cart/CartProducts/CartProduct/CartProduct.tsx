@@ -44,7 +44,10 @@ const CartProduct = ({ product }: IProps) => {
         </S.Desc>
       </S.Details>
       <S.Price>
-        <p>{`${currencyFormat}  ${formatPrice(price, currencyId)}`}</p>
+        <p>{`${currencyFormat}  ${formatPrice(
+          sku === 39876704341265610 ? price * 0.9 : price,
+          currencyId
+        )}`}</p>
         <div>
           <S.ChangeQuantity
             onClick={handleDecreaseProductQuantity}
