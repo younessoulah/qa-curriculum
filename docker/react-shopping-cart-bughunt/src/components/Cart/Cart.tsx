@@ -10,9 +10,13 @@ const Cart = () => {
 
   const handleCheckout = () => {
     if (total.productQuantity) {
+      const subtotalIgnoringQty = products.reduce(
+        (sum, product) => sum + product.price,
+        0
+      );
       alert(
         `Checkout - Subtotal: ${total.currencyFormat} ${formatPrice(
-          total.totalPrice,
+          subtotalIgnoringQty,
           total.currencyId
         )}`
       );
