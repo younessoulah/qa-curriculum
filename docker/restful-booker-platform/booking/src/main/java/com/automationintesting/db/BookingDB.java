@@ -82,9 +82,12 @@ public class BookingDB {
 
     public List<Booking> queryBookingsById(String roomid) throws SQLException {
         List<Booking> listToReturn = new ArrayList<Booking>();
-        String sql = "SELECT * FROM BOOKINGS WHERE roomid = " + roomid;
+        String sql = "SELECT * FROM BOOKINGS WHERE roomid = ?";
 
-        ResultSet results = connection.prepareStatement(sql).executeQuery();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, roomid);
+
+        ResultSet results = ps.executeQuery();
         while(results.next()){
             listToReturn.add(new Booking(results));
         }
@@ -186,9 +189,12 @@ public class BookingDB {
 
     public List<BookingSummary> queryBookingSummariesById(String roomid) throws SQLException {
         List<BookingSummary> listToReturn = new ArrayList<BookingSummary>();
-        String sql = "SELECT * FROM BOOKINGS WHERE roomid = " + roomid;
+        String sql = "SELECT * FROM BOOKINGS WHERE roomid = ?";
 
-        ResultSet results = connection.prepareStatement(sql).executeQuery();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, roomid);
+
+        ResultSet results = ps.executeQuery();
         while(results.next()){
             listToReturn.add(new BookingSummary(results));
         }
@@ -198,9 +204,13 @@ public class BookingDB {
 
     public List<AvailableRoom> queryByDate(LocalDate checkin, LocalDate checkout) throws SQLException {
         List<AvailableRoom> listToReturn = new ArrayList<AvailableRoom>();
-        String sql = "SELECT * FROM BOOKINGS WHERE checkin >= '" + checkin.toString() + "' AND checkout <= '" + checkout.toString() + "'";
+        String sql = "SELECT * FROM BOOKINGS WHERE checkin >= ? AND checkout <= ?";
 
-        ResultSet results = connection.prepareStatement(sql).executeQuery();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(checkin));
+        ps.setDate(2, Date.valueOf(checkout));
+
+        ResultSet results = ps.executeQuery();
         while(results.next()){
             listToReturn.add(new AvailableRoom(results.getInt("roomid")));
         }
