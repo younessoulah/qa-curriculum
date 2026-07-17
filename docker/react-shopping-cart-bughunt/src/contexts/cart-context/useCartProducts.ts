@@ -46,7 +46,6 @@ const useCartProducts = () => {
     );
 
     setProducts(updatedProducts);
-    updateCartTotal(updatedProducts);
   };
 
   const increaseProductQuantity = (productToIncrease: ICartProduct) => {
