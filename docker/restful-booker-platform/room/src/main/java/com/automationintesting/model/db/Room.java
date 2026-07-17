@@ -38,7 +38,7 @@ public class Room {
 
     @JsonProperty
     @Min(1)
-    @Max(999)
+    @Max(998)
     private int roomPrice;
 
     public Room() {
