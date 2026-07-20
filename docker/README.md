@@ -54,6 +54,22 @@ docker compose -f docker/docker-compose.yml up --build
 Each app also has its own `docker-compose.yml` (`restful-booker-platform/docker-compose.yml`)
 if you only want to run that one on its own.
 
+## Hosting for learners (instead of local Docker)
+
+Learners can also be pointed at hosted instances of the buggy apps:
+
+- **react-shopping-cart-bughunt → Vercel.** It's a static SPA with no backend and no
+  shared server state (the cart lives entirely in the browser), so a single deployment
+  serves every learner safely. Config is in `react-shopping-cart-bughunt/vercel.json`;
+  in the Vercel project set Root Directory = `docker/react-shopping-cart-bughunt` and
+  Production Branch = `seeded/cohort-01`. Keep the GitHub repo **private** (it holds the
+  answer keys — Vercel deploys private repos fine).
+- **restful-booker-platform → a free VM (not Vercel).** Its long-running Java services
+  can't run on Vercel. Host the whole compose stack on an Oracle Cloud Always-Free VM —
+  step-by-step in `docker/deploy-oracle-vm.md`. Note it's one shared instance (data is
+  shared across learners; `docker-compose.oracle.yml` resets it periodically) and the app
+  is deliberately vulnerable, so restrict access and tear it down after the cohort.
+
 ## Seeded-bug branches
 
 Bugs are injected on dedicated branches (e.g. `seeded/cohort-01`), one commit per bug
