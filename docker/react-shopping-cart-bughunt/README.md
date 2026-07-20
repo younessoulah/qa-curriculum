@@ -1,11 +1,13 @@
-## 🛍️ Simple ecommerce cart application [![CircleCI](https://circleci.com/gh/jeffersonRibeiro/react-shopping-cart.svg?style=svg)](https://circleci.com/gh/jeffersonRibeiro/react-shopping-cart)
+## 🛍️ Simple ecommerce cart application
 
 <p align="center">
 
   <img src="./readme-banner.png">
 </p>
 
-## Basic Overview - [Live Demo](https://react-shopping-cart-67954.firebaseapp.com/)
+## Basic Overview
+
+> Runs fully locally via Docker — see `docker/README.md` at the repo root for setup.
 
 <p align="left">
 

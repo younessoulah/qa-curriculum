@@ -1,0 +1,41 @@
+services:
+  rbp-booking:
+    build: ./restful-booker-platform/booking
+    ports:
+      - "3000:3000"
+    restart: always
+  rbp-room:
+    build: ./restful-booker-platform/room
+    ports:
+      - "3001:3001"
+    restart: always
+  rbp-branding:
+    build: ./restful-booker-platform/branding
+    ports:
+      - "3002:3002"
+    restart: always
+  rbp-assets:
+    build: ./restful-booker-platform/assets
+    ports:
+      - "80:80"
+    restart: always
+  rbp-auth:
+    build: ./restful-booker-platform/auth
+    ports:
+      - "3004:3004"
+    restart: always
+  rbp-report:
+    build: ./restful-booker-platform/report
+    ports:
+      - "3005:3005"
+    restart: always
+  rbp-message:
+    build: ./restful-booker-platform/message
+    ports:
+      - "3006:3006"
+    restart: always
+  bughunt-cart:
+    build: ./react-shopping-cart-bughunt
+    ports:
+      - "4000:80"
+    restart: always

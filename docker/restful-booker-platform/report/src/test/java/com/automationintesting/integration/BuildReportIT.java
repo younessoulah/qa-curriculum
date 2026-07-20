@@ -72,6 +72,7 @@ public class BuildReportIT {
     @Test
     public void testSpecificRoomReportCreation(){
         Response reportResponse = given()
+                                    .cookie("token", "abc123")
                                     .get("http://localhost:3005/report/room/1");
 
         Approvals.verify(reportResponse.getBody().prettyPrint());

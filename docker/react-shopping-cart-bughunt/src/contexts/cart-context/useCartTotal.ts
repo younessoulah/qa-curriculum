@@ -14,7 +14,7 @@ const useCartTotal = () => {
     );
 
     const totalPrice = products.reduce((sum: number, product: ICartProduct) => {
-      sum += product.price * product.quantity;
+      sum += Math.floor(product.price * product.quantity);
       return sum;
     }, 0);
 
@@ -32,7 +32,7 @@ const useCartTotal = () => {
       installments,
       totalPrice,
       currencyId: 'USD',
-      currencyFormat: '$',
+      currencyFormat: '€',
     };
 
     setTotal(total);

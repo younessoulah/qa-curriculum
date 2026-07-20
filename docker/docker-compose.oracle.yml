@@ -1,0 +1,30 @@
+# Override for hosting the stack on a single shared VM (e.g. Oracle Cloud Always Free).
+#
+# Adds `dbRefresh` (minutes) to every restful-booker-platform service that owns a
+# database, so learner-created data (bookings, rooms, messages, tokens) resets to
+# the seed state on an interval. On a SHARED instance this self-heals the data drift
+# that many learners hitting one app would otherwise cause. Set to a comfortable
+# session length; 120 = every 2 hours. Set to "0" (or remove this file) to disable.
+#
+# Usage on the VM:
+#   docker compose -f docker-compose.yml -f docker-compose.oracle.yml up -d --build
+#
+# Only port 80 (the frontend) needs to be reachable from the internet — the six Java
+# service ports are used internally by the Next.js server-side rewrites, so leave them
+# closed in the cloud firewall. See docker/deploy-oracle-vm.md.
+services:
+  rbp-auth:
+    environment:
+      dbRefresh: "120"
+  rbp-booking:
+    environment:
+      dbRefresh: "120"
+  rbp-room:
+    environment:
+      dbRefresh: "120"
+  rbp-message:
+    environment:
+      dbRefresh: "120"
+  rbp-branding:
+    environment:
+      dbRefresh: "120"

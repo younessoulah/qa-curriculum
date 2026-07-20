@@ -31,7 +31,7 @@ const Product = ({ product }: IProps) => {
 
     productInstallment = (
       <S.Installment>
-        <span>or {installments} x</span>
+        <span>or {installments + 1} x</span>
         <b>
           {currencyFormat}
           {formatPrice(installmentPrice, currencyId)}
@@ -41,7 +41,11 @@ const Product = ({ product }: IProps) => {
   }
 
   const handleAddProduct = () => {
-    addProduct({ ...product, quantity: 1 });
+    addProduct({
+      ...product,
+      id: product.sku === 8552515751438644 ? 999 : product.id,
+      quantity: 1,
+    });
     openCart();
   };
 
@@ -54,7 +58,7 @@ const Product = ({ product }: IProps) => {
 
   return (
     <S.Container onKeyUp={handleAddProductWhenEnter} sku={sku} tabIndex={1}>
-      {isFreeShipping && <S.Stopper>Free shipping</S.Stopper>}
+      {!isFreeShipping && <S.Stopper>Free shipping</S.Stopper>}
       <S.Image alt={title} />
       <S.Title>{title}</S.Title>
       <S.Price>

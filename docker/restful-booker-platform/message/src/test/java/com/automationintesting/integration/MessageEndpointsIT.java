@@ -59,6 +59,7 @@ public class MessageEndpointsIT {
     @Test
     public void getMessage(){
         Response response = given()
+                .cookie("token", "abc123")
                 .get("http://localhost:3006/message/1");
 
         Approvals.verify(response.getBody().prettyPrint());
@@ -67,6 +68,7 @@ public class MessageEndpointsIT {
     @Test
     public void getMessages(){
         Response response = given()
+                .cookie("token", "abc123")
                 .get("http://localhost:3006/message/");
 
         Approvals.verify(response.getBody().prettyPrint());
@@ -75,10 +77,12 @@ public class MessageEndpointsIT {
     @Test
     public void getCount(){
         Response response = given()
+                .cookie("token", "abc123")
                 .get("http://localhost:3006/message/count");
 
         Approvals.verify(response.getBody().prettyPrint());
     }
+
 
     @Test
     public void deleteMessage(){
@@ -126,6 +130,7 @@ public class MessageEndpointsIT {
 
 
         Response response = given()
+                .cookie("token", "abc123")
                 .get("http://localhost:3006/message/count");
 
         Approvals.verify(response.getBody().prettyPrint());
