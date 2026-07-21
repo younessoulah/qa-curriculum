@@ -82,12 +82,9 @@ public class BookingDB {
 
     public List<Booking> queryBookingsById(String roomid) throws SQLException {
         List<Booking> listToReturn = new ArrayList<Booking>();
-        String sql = "SELECT * FROM BOOKINGS WHERE roomid = ?";
+        String sql = "SELECT * FROM BOOKINGS WHERE roomid = " + roomid;
 
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, String.valueOf(Integer.parseInt(roomid) - 1));
-
-        ResultSet results = ps.executeQuery();
+        ResultSet results = connection.prepareStatement(sql).executeQuery();
         while(results.next()){
             listToReturn.add(new Booking(results));
         }
@@ -147,6 +144,7 @@ public class BookingDB {
 
         Calendar parseCheckinDate = Calendar.getInstance();
         parseCheckinDate.setTime(Date.valueOf(bookingToCheck.getBookingDates().getCheckin()));
+        parseCheckinDate.add(Calendar.DATE, 1);
 
         for(int i = 1; i <= 6; i++){
             if (i % 2 == 0){
@@ -168,7 +166,7 @@ public class BookingDB {
         if(bookingIds.size() == 0){
             return false;
         } else if(bookingIds.size() == 1) {
-            return true;
+            return bookingIds.get(0) != bookingToCheck.getBookingid();
         } else {
             return true;
         }
@@ -188,12 +186,9 @@ public class BookingDB {
 
     public List<BookingSummary> queryBookingSummariesById(String roomid) throws SQLException {
         List<BookingSummary> listToReturn = new ArrayList<BookingSummary>();
-        String sql = "SELECT * FROM BOOKINGS WHERE roomid = ?";
+        String sql = "SELECT * FROM BOOKINGS WHERE roomid = " + roomid;
 
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, roomid);
-
-        ResultSet results = ps.executeQuery();
+        ResultSet results = connection.prepareStatement(sql).executeQuery();
         while(results.next()){
             listToReturn.add(new BookingSummary(results));
         }
@@ -203,13 +198,9 @@ public class BookingDB {
 
     public List<AvailableRoom> queryByDate(LocalDate checkin, LocalDate checkout) throws SQLException {
         List<AvailableRoom> listToReturn = new ArrayList<AvailableRoom>();
-        String sql = "SELECT * FROM BOOKINGS WHERE checkin >= ? AND checkout <= ?";
+        String sql = "SELECT * FROM BOOKINGS WHERE checkin >= '" + checkin.toString() + "' AND checkout <= '" + checkout.toString() + "'";
 
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setDate(1, Date.valueOf(checkin));
-        ps.setDate(2, Date.valueOf(checkout));
-
-        ResultSet results = ps.executeQuery();
+        ResultSet results = connection.prepareStatement(sql).executeQuery();
         while(results.next()){
             listToReturn.add(new AvailableRoom(results.getInt("roomid")));
         }

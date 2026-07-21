@@ -24,7 +24,7 @@ const useCartProducts = () => {
   const addProduct = (newProduct: ICartProduct) => {
     let updatedProducts;
     const isProductAlreadyInCart = products.some(
-      (product: ICartProduct) => newProduct.sku === product.id
+      (product: ICartProduct) => newProduct.id === product.id
     );
 
     if (isProductAlreadyInCart) {
@@ -40,12 +40,12 @@ const useCartProducts = () => {
   };
 
   const removeProduct = (productToRemove: ICartProduct) => {
-    const targetIndex = products.indexOf(productToRemove) - 1;
     const updatedProducts = products.filter(
-      (_product: ICartProduct, index: number) => index !== targetIndex
+      (product: ICartProduct) => product.id !== productToRemove.id
     );
 
     setProducts(updatedProducts);
+    updateCartTotal(updatedProducts);
   };
 
   const increaseProductQuantity = (productToIncrease: ICartProduct) => {

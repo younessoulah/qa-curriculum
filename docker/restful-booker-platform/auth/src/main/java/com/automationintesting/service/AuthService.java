@@ -37,12 +37,17 @@ public class AuthService {
     }
 
     public HttpStatus deleteToken(Token token) throws SQLException {
-        return HttpStatus.OK;
+        Boolean successfulDeletion = authDB.deleteToken(token);
+
+        if(successfulDeletion){
+            return HttpStatus.OK;
+        } else {
+            return HttpStatus.NOT_FOUND;
+        }
     }
 
     public Decision queryCredentials(Auth auth) throws SQLException {
-        authDB.queryCredentials(auth);
-        if(true){
+        if(authDB.queryCredentials(auth)){
             Token token = new Token(new RandomString(16, ThreadLocalRandom.current()).nextString());
 
             Boolean successfulStorage = authDB.insertToken(token);

@@ -14,7 +14,7 @@ public class DateCheckValidator {
             return false;
         }
 
-        return checkin.compareTo(checkout) <= 0;
+        return checkin.compareTo(checkout) < 0;
     }
 
 }

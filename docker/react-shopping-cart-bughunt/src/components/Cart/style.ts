@@ -10,7 +10,7 @@ export const CartButton = styled.button`
   text-align: center;
   line-height: 50px;
   position: absolute;
-  top: -6px;
+  top: 0;
   left: 0;
   cursor: pointer;
   z-index: 2;

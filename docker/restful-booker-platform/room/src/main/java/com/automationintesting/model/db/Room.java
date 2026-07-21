@@ -21,7 +21,7 @@ public class Room {
 
     @JsonProperty
     @NotNull(message = "Type must be set")
-    @Pattern(regexp = "Single|Double|Twin|Suite", message = "Type can only contain the room options Single, Double, Twin, Family or Suite")
+    @Pattern(regexp = "Single|Double|Twin|Family|Suite", message = "Type can only contain the room options Single, Double, Twin, Family or Suite")
     private String type;
 
     @JsonProperty
@@ -38,7 +38,7 @@ public class Room {
 
     @JsonProperty
     @Min(1)
-    @Max(998)
+    @Max(999)
     private int roomPrice;
 
     public Room() {

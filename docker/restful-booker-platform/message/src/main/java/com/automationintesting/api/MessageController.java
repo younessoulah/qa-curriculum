@@ -4,7 +4,6 @@ import com.automationintesting.model.db.Count;
 import com.automationintesting.model.db.Message;
 import com.automationintesting.model.db.Messages;
 import com.automationintesting.model.service.MessageResult;
-import com.automationintesting.requests.AuthRequests;
 import com.automationintesting.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,36 +19,22 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    private final AuthRequests authRequest = new AuthRequests();
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ResponseEntity<Messages> getMessages(@CookieValue(value = "token", required = false) String token) throws SQLException {
-        if (!authRequest.postCheckAuth(token)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
+    public ResponseEntity<Messages> getMessages() throws SQLException {
         Messages messages = messageService.getMessages();
 
         return ResponseEntity.status(HttpStatus.OK).body(messages);
     }
 
     @RequestMapping(value = "/count", method = RequestMethod.GET)
-    public ResponseEntity<Count> getCount(@CookieValue(value = "token", required = false) String token) throws SQLException {
-        if (!authRequest.postCheckAuth(token)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
+    public ResponseEntity<Count> getCount() throws SQLException {
         Count count = messageService.getCount();
 
         return ResponseEntity.status(HttpStatus.OK).body(count);
     }
 
     @RequestMapping(value = "/{id:[0-9]*}", method = RequestMethod.GET)
-    public ResponseEntity<Message> getMessage(@PathVariable(value = "id") int messageId, @CookieValue(value = "token", required = false) String token) throws SQLException {
-        if (!authRequest.postCheckAuth(token)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
+    public ResponseEntity<Message> getMessage(@PathVariable(value = "id") int messageId) throws SQLException {
         MessageResult messageResult = messageService.getSpecificMessage(messageId);
 
         return ResponseEntity.status(messageResult.getHttpStatus()).body(messageResult.getMessage());

@@ -49,6 +49,6 @@ printf "\n####### RESTFUL-BOOKER-PLATFORM #######
 ####                               ####
 #######################################\n"
 
-mvn clean install -DskipTests
+mvn clean install
 
 /bin/bash ./run_locally.sh -e true

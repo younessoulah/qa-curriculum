@@ -73,6 +73,8 @@ public class MessageService {
 
     public HttpStatus markAsRead(int messageId, String token) throws SQLException {
         if(authRequest.postCheckAuth(token)){
+            messageDB.markAsRead(messageId);
+
             return HttpStatus.ACCEPTED;
         } else {
             return HttpStatus.FORBIDDEN;
